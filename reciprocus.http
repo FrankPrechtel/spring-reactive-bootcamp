@@ -1,0 +1,43 @@
+GET http://localhost:8080/failure
+Authorization: Basic myuser Password1234
+
+###
+
+GET http://localhost:8080/distribute
+Authorization: Basic myuser Password1234
+
+###
+
+GET http://localhost:8080/actuator/gateway/routes
+Authorization: Basic myuser Password1234
+
+###
+
+GET http://localhost:8080/gingerbread/1
+Accept: application/json
+#Authorization: Basic myuser Password1234
+
+###
+
+GET http://localhost:8080/reactive/1
+Accept: application/json
+#Authorization: Basic myuser Password1234
+
+###
+
+GET http://localhost:8080/reactive/1
+Accept: application/json
+Authorization: Basic myuser Password1234
+
+###
+
+GET http://localhost:8080/gateway/1
+Accept: application/json
+Authorization: Basic myuser Password1234
+
+###
+
+DELETE http://localhost:8080/gingerbreads
+Authorization: Basic myuser Password1234
+
+###
