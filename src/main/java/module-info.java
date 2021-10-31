@@ -1,2 +1,0 @@
-module eu.prechtel.reciprocus {
-}
