@@ -104,7 +104,7 @@
             <artifactId>blockhound-junit-platform</artifactId>
             <!-- for production -->
             <!-- <artifactId>blockhound</artifactId> -->
-            <version>1.0.4.RELEASE</version>
+            <version>1.0.6.RELEASE</version>
             <scope>test</scope>
         </dependency>
 
