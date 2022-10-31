@@ -135,15 +135,15 @@ public class MonoFluxTest {
         }
 
         // TODO: give it a try
-        @Disabled
-        @Test
-        void whatMethod() {
-            Flux<Integer> flux1 = Flux.range(1, 5).delayElements(Duration.ofMillis(200));
-            Flux<Integer> flux2 = Flux.range(6, 5);
-            StepVerifier.create(flux1.mergeWith(flux2).log())
-                    .expectNext(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-                    .verifyComplete();
-        }
+		@Disabled("fix as an exercise for the workshop")
+		@Test
+		void whatMethod() {
+			Flux<Integer> flux1 = Flux.range(1, 5).delayElements(Duration.ofMillis(200));
+			Flux<Integer> flux2 = Flux.range(6, 5);
+			StepVerifier.create(flux1.mergeWith(flux2).log())
+					.expectNext(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+					.verifyComplete();
+		}
     }
 
     @Nested

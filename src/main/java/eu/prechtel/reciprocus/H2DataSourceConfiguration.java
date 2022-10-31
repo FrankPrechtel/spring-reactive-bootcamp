@@ -1,6 +1,5 @@
 package eu.prechtel.reciprocus;
 
-import io.r2dbc.h2.H2ConnectionConfiguration;
 import io.r2dbc.h2.H2ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.context.annotation.Bean;

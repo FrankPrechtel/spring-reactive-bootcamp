@@ -36,7 +36,7 @@ class GingerbreadControllerTest {
 
     @Test
     // FIXME: remove @Disabled to activate the test
-    @Disabled
+	@Disabled("fix as an exercise for the workshop")
     void feast() {
         // FIXME: delete all gingerbread and create and get a list of 2 of them
         ////////////////////////////////////////////////////////////////
