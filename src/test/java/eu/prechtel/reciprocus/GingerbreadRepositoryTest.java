@@ -1,6 +1,7 @@
 package eu.prechtel.reciprocus;
 
 import io.r2dbc.h2.H2ConnectionFactory;
+import io.r2dbc.spi.ConnectionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.r2dbc.core.DatabaseClient;
+import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.test.annotation.DirtiesContext;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,10 +31,10 @@ class GingerbreadRepositoryTest {
     final Logger log = LoggerFactory.getLogger(GingerbreadRepositoryTest.class);
 
     @Autowired
-    DatabaseClient databaseClient;
+	DatabaseClient databaseClient;
 
     @Autowired
-    H2ConnectionFactory connectionFactory;
+	ConnectionFactory connectionFactory;
 
     @Autowired
     GingerbreadRepository repository;
@@ -44,7 +45,7 @@ class GingerbreadRepositoryTest {
                 "DROP TABLE IF EXISTS gingerbread;",
                 "CREATE TABLE gingerbread (id SERIAL PRIMARY KEY, flavor VARCHAR(255));"
         );
-        statements.forEach(it -> databaseClient.execute(it)
+        statements.forEach(it -> databaseClient.sql(it)
                 .fetch()
                 .rowsUpdated()
                 .as(StepVerifier::create)
@@ -72,25 +73,13 @@ class GingerbreadRepositoryTest {
 
     @Test
     void findFirstByFlavor() {
-        final Gingerbread first = repository.save(new Gingerbread("chocolate")).block();
-        log.trace("{}", first);
-        final Optional<Gingerbread> second = repository.save(new Gingerbread("cinnamon")).blockOptional();
-        log.trace("{}", second);
+        repository.save(new Gingerbread("chocolate")).block();
+		repository.save(new Gingerbread("cinnamon")).block();
 
-        final Mono<Gingerbread> cinnamon = repository.findFirstByFlavor(Mono.just("cinnamon"));
-        final Mono<Gingerbread> chocolate = repository.findFirstByFlavor(Mono.just("chocolate"));
-
-        StepVerifier.create(cinnamon)
-                .assertNext(gingerbread ->
-                        assertEquals("cinnamon", gingerbread.getFlavor()))
-                .expectComplete()
-                .verify();
-
-        StepVerifier.create(chocolate)
-                .assertNext(gingerbread ->
-                        assertEquals("chocolate", gingerbread.getFlavor()))
-                .expectComplete()
-                .verify();
+		repository.findFirstByFlavor("cinnamon")
+				.as(StepVerifier::create)
+				.expectNextCount(1)
+				.verifyComplete();
     }
 
     @Test
@@ -98,7 +87,7 @@ class GingerbreadRepositoryTest {
         repository.save(new Gingerbread("chocolate")).block();
         repository.save(new Gingerbread("cinnamon")).block();
 
-        final Mono<Gingerbread> honey = repository.findFirstByFlavor(Mono.just("honey"));
+        final Mono<Gingerbread> honey = repository.findFirstByFlavor("honey");
         StepVerifier.create(honey).expectNextCount(0).expectComplete().verify();
     }
 

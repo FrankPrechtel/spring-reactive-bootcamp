@@ -1,11 +1,9 @@
 package eu.prechtel.reciprocus;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.r2dbc.core.DatabaseClient;
+import org.springframework.r2dbc.core.DatabaseClient;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -28,7 +26,7 @@ public class Application {
                 "CREATE TABLE gingerbread (id SERIAL PRIMARY KEY, flavor VARCHAR(255));",
                 "INSERT INTO gingerbread VALUES (1, 'cinnamon');"
         );
-        statements.forEach(it -> databaseClient.execute(it)
+        statements.forEach(it -> databaseClient.sql(it)
                 .fetch()
                 .rowsUpdated().block());
 
