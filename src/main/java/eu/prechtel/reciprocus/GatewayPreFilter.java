@@ -15,7 +15,7 @@ public class GatewayPreFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("prefilter: " + exchange.getAttributes().toString());
+        log.info("prefilter: {}", exchange.getAttributes());
         return chain.filter(exchange);
     }
 }

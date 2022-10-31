@@ -1,6 +1,5 @@
 package eu.prechtel.reciprocus;
 
-import io.r2dbc.h2.H2ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -19,7 +18,6 @@ import reactor.util.function.Tuples;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -93,7 +91,7 @@ class GingerbreadRepositoryTest {
 
     @Test
     // FIXME: remove @Disabled to activate the test
-    @Disabled
+    @Disabled("fix as an exercise for the workshop")
     void combineFlux() {
         final Gingerbread chocolate = repository.save(new Gingerbread("chocolate")).block();
         final Gingerbread cinnamon = repository.save(new Gingerbread("cinnamon")).block();
