@@ -28,7 +28,7 @@ public class GingerbreadGateway {
                 .route("hystrix", it -> it
                         .path("/failure/**")
                         .filters(f -> f
-                                .hystrix(config -> config
+                                .circuitBreaker(config -> config
                                         .setName("fallback")
                                         .setFallbackUri("forward:/fallback")))
                         .uri("http://localhost:8080"))

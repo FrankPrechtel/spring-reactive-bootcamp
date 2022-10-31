@@ -9,10 +9,10 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface GingerbreadRepository
         extends ReactiveCrudRepository<Gingerbread, Long> {
-    // note the arguments
+
     Flux<Gingerbread> findAllByFlavor(String flavor);
 
-    Mono<Gingerbread> findFirstByFlavor(Mono<String> flavor);
+	Mono<Gingerbread> findFirstByFlavor(String flavor);
 
     Mono<Gingerbread> findBy(Integer id);
 }
