@@ -34,9 +34,9 @@ class GingerbreadControllerTest {
                 .value(Gingerbread::getFlavor, is(not(emptyOrNullString())));
     }
 
-    @Test
     // FIXME: remove @Disabled to activate the test
 	@Disabled("fix as an exercise for the workshop")
+    @Test
     void feast() {
         // FIXME: delete all gingerbread and create and get a list of 2 of them
         ////////////////////////////////////////////////////////////////
