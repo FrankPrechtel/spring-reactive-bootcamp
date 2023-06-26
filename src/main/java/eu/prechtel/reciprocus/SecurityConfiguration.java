@@ -12,7 +12,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 public class SecurityConfiguration {
 
-    @Bean
+    /*@Bean
     @Order(1)
     public SecurityWebFilterChain userOnly(ServerHttpSecurity http) {
         return http
@@ -23,8 +23,8 @@ public class SecurityConfiguration {
                 .and()
                 .httpBasic()
                 .and().build();
-    }
-/*
+    }*/
+
     @Bean
     @Order(2)
     public SecurityWebFilterChain permitAll(ServerHttpSecurity http) {
@@ -35,7 +35,6 @@ public class SecurityConfiguration {
                 .permitAll()
                 .and().build();
     }
-*/
 
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {

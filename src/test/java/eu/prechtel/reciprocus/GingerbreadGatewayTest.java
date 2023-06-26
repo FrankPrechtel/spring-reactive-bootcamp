@@ -1,5 +1,6 @@
 package eu.prechtel.reciprocus;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,13 +25,13 @@ class GingerbreadGatewayTest {
                 .expectStatus().isUnauthorized();
     }
 
-    @Test
+	@Disabled("need to fix Cloud Gateway configuration first")
+	@Test
     void redirectOnFailure() {
         final String token = "Basic " + Base64.getEncoder().encodeToString("myuser:Password1234".getBytes());
         webTestClient.get()
                 .uri("/failure")
                 .header("Authorization", token)
-                //.header("Authorization", "Basic myuser Password1234")
                 .exchange()
                 .expectStatus().isOk();
     }

@@ -8,3 +8,14 @@ management:
     web:
       exposure:
         include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG
+      http:
+        server:
+          reactive: DEBUG
+      web:
+        reactive: DEBUG
