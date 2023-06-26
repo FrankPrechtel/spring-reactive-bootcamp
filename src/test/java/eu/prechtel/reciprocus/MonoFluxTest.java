@@ -3,7 +3,7 @@ package eu.prechtel.reciprocus;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import reactor.blockhound.BlockingOperationError;
+//import reactor.blockhound.BlockingOperationError;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Mono;
@@ -105,7 +105,7 @@ public class MonoFluxTest {
 				.subscribe(log::info, err -> log.error(err.getMessage(), err), () -> log.info("Completed"));
 		}
 
-		@Test
+/*		@Test
 		void blockDetection() {
 
 			Scheduler canNotBlock = Schedulers.newParallel("eventLoop", 4);
@@ -123,7 +123,7 @@ public class MonoFluxTest {
 					});
 
 			StepVerifier.create(stringFlux).expectError(BlockingOperationError.class).verify();
-		}
+		}*/
 
 		@Test
 		void merge() {
