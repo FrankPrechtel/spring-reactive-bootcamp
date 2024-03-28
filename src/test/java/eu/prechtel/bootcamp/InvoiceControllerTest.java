@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -11,35 +11,34 @@ import java.util.Base64;
 import static org.hamcrest.Matchers.*;
 
 //@WebFluxTest(
-//        controllers = GingerbreadController.class,
+//        controllers = InvoiceController.class,
 //        excludeAutoConfiguration = { ReactiveSecurityAutoConfiguration.class })
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class GingerbreadControllerTest {
+class InvoiceControllerTest {
 
     final WebTestClient webTestClient;
 
-    public GingerbreadControllerTest(@Autowired WebTestClient webTestClient) {
+    public InvoiceControllerTest(@Autowired WebTestClient webTestClient) {
         this.webTestClient = webTestClient;
     }
 
 	@Disabled("need to fix Cloud Gateway configuration first")
 	@Test
-    void exchangeGingerbread() {
+    void exchangeInvoice() {
         final String token = "Basic " + Base64.getEncoder().encodeToString("myuser:Password1234".getBytes());
-        webTestClient.get()
-                .uri("/gingerbread/1")
-                .header("Authorization", token)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(Gingerbread.class)
-                .value(Gingerbread::getFlavor, is(not(emptyOrNullString())));
+		webTestClient.get()
+			.uri("/Invoice/1")
+			.header("Authorization", token)
+			.exchange()
+			.expectStatus().isOk()
+			.expectBody(Invoice.class);
     }
 
     // FIXME: remove @Disabled to activate the test
 	@Disabled("fix as an exercise for the workshop")
     @Test
     void feast() {
-        // FIXME: delete all gingerbread and create and get a list of 2 of them
+        // FIXME: delete all Invoice and create and get a list of 2 of them
         ////////////////////////////////////////////////////////////////
         // webTestClient...
         // webTestClient...
@@ -47,10 +46,10 @@ class GingerbreadControllerTest {
         ////////////////////////////////////////////////////////////////
 
         webTestClient.get()
-                .uri("/gingerbreads")
+                .uri("/Invoices")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBodyList(Gingerbread.class)
+                .expectBodyList(Invoice.class)
         // FIXME: enable
         ////////////////////////////////////////////////////////////////
         //        .hasSize(2)

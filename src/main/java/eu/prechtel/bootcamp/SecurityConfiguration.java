@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -12,7 +12,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 public class SecurityConfiguration {
 
-    /*@Bean
+    @Bean
     @Order(1)
     public SecurityWebFilterChain userOnly(ServerHttpSecurity http) {
         return http
@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 .and()
                 .httpBasic()
                 .and().build();
-    }*/
+    }
 
     @Bean
     @Order(2)

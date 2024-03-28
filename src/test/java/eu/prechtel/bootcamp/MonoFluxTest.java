@@ -1,9 +1,11 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import reactor.blockhound.BlockingOperationError;
+import reactor.blockhound.BlockHound;
+import reactor.blockhound.BlockingOperationError;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Mono;
@@ -105,9 +107,8 @@ public class MonoFluxTest {
 				.subscribe(log::info, err -> log.error(err.getMessage(), err), () -> log.info("Completed"));
 		}
 
-/*		@Test
+		@Test
 		void blockDetection() {
-
 			Scheduler canNotBlock = Schedulers.newParallel("eventLoop", 4);
 			Flux<String> stringFlux =
 				Flux.just("a", "b", "c", "d", "e", "f")
@@ -117,13 +118,13 @@ public class MonoFluxTest {
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
-							// ignore
+							log.info(e.getMessage());
 						}
 						return input.toUpperCase();
 					});
 
 			StepVerifier.create(stringFlux).expectError(BlockingOperationError.class).verify();
-		}*/
+		}
 
 		@Test
 		void merge() {

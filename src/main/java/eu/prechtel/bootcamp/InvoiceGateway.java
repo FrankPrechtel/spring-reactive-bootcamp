@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 // https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/index.html
 @Configuration
-public class GingerbreadGateway {
+public class InvoiceGateway {
 
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
@@ -23,7 +23,7 @@ public class GingerbreadGateway {
                         .path("/another/**")
                         .and()
                         .host("localhost")
-                        .uri("http://localhost:8080/gingerbread/1"))
+                        .uri("http://localhost:8080/Invoice/1"))
                 // Hystrix is deprecated -> Resilience4j
                 .route("hystrix", it -> it
                         .path("/failure/**")

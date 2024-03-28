@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -7,21 +7,20 @@ import java.util.Objects;
 import java.util.Random;
 
 @Table
-public class Gingerbread {
-    public static final String[] flavors = {"chocolate", "cinnamon", "honey"};
+public class Invoice {
 
     @Id
     private Integer id;
 
-    private String flavor;
+    private String type;
 
-    public Gingerbread() {
-        // get a random flavor
-        this(flavors[new Random().nextInt(flavors.length)]);
+    public Invoice() {
+        // get a random type
+        this("REGULAR");
     }
 
-    public Gingerbread(String flavor) {
-        this.flavor = flavor;
+    public Invoice(String type) {
+        this.type = type;
     }
 
     public Integer getId() {
@@ -32,19 +31,19 @@ public class Gingerbread {
         this.id = id;
     }
 
-    public String getFlavor() {
-        return flavor;
+    public String getType() {
+        return type;
     }
 
-    public void setFlavor(String flavor) {
-        this.flavor = flavor;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return "Gingerbread{" +
+        return "Invoice{" +
                 "id=" + id +
-                ", flavor='" + flavor + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 
@@ -52,13 +51,13 @@ public class Gingerbread {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Gingerbread that = (Gingerbread) o;
+        Invoice that = (Invoice) o;
         return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getFlavor(), that.getFlavor());
+                Objects.equals(getType(), that.getType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFlavor());
+        return Objects.hash(getId(), getType());
     }
 }

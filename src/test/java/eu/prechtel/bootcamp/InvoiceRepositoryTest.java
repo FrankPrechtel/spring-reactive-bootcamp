@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,9 +24,9 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
-class GingerbreadRepositoryTest {
+class InvoiceRepositoryTest {
 
-    final Logger log = LoggerFactory.getLogger(GingerbreadRepositoryTest.class);
+    final Logger log = LoggerFactory.getLogger(InvoiceRepositoryTest.class);
 
     @Autowired
 	DatabaseClient databaseClient;
@@ -35,13 +35,13 @@ class GingerbreadRepositoryTest {
 	ConnectionFactory connectionFactory;
 
     @Autowired
-    GingerbreadRepository repository;
+    InvoiceRepository repository;
 
     @BeforeEach
     void clear() {
         List<String> statements = Arrays.asList(
-                "DROP TABLE IF EXISTS gingerbread;",
-                "CREATE TABLE gingerbread (id SERIAL PRIMARY KEY, flavor VARCHAR(255));"
+                "DROP TABLE IF EXISTS Invoice;",
+                "CREATE TABLE Invoice (id SERIAL PRIMARY KEY, type VARCHAR(255));"
         );
         statements.forEach(it -> databaseClient.sql(it)
                 .fetch()
@@ -54,27 +54,27 @@ class GingerbreadRepositoryTest {
     }
 
     @Test
-    void findAllByFlavor() {
-        repository.save(new Gingerbread("chocolate")).block();
-        repository.save(new Gingerbread("chocolate")).block();
-        repository.save(new Gingerbread("cinnamon")).block();
-        repository.save(new Gingerbread("honey")).block();
+    void findAllByType() {
+        repository.save(new Invoice("REGULAR")).block();
+        repository.save(new Invoice("REGULAR")).block();
+        repository.save(new Invoice("PROFORMA")).block();
+        repository.save(new Invoice("OVERDUE")).block();
 
-        Flux<Gingerbread> gingerbreadFlux = repository.findAll();//ByFlavor("chocolate");\
-        StepVerifier.create(gingerbreadFlux.log())
+        Flux<Invoice> InvoiceFlux = repository.findAll();//ByType(Type.REGULAR);\
+        StepVerifier.create(InvoiceFlux.log())
                 .expectNextCount(1)
-                .assertNext(entry -> assertEquals("chocolate", entry.getFlavor()))
+                .assertNext(entry -> assertEquals("REGULAR", entry.getType()))
                 .expectNextCount(2)
                 .expectComplete()
                 .verify();
     }
 
     @Test
-    void findFirstByFlavor() {
-        repository.save(new Gingerbread("chocolate")).block();
-		repository.save(new Gingerbread("cinnamon")).block();
+    void findFirstByType() {
+        repository.save(new Invoice("REGULAR")).block();
+		repository.save(new Invoice("PROFORMA")).block();
 
-		repository.findFirstByFlavor("cinnamon")
+		repository.findFirstByType("PROFORMA")
 				.as(StepVerifier::create)
 				.expectNextCount(1)
 				.verifyComplete();
@@ -82,32 +82,33 @@ class GingerbreadRepositoryTest {
 
     @Test
     void findNoMatch() {
-        repository.save(new Gingerbread("chocolate")).block();
-        repository.save(new Gingerbread("cinnamon")).block();
+        repository.save(new Invoice("REGULAR")).block();
+        repository.save(new Invoice("PROFORMA")).block();
 
-        final Mono<Gingerbread> honey = repository.findFirstByFlavor("honey");
-        StepVerifier.create(honey).expectNextCount(0).expectComplete().verify();
+        final Mono<Invoice> overdue = repository.findFirstByType("OVERDUE");
+        StepVerifier.create(overdue).expectNextCount(0).expectComplete().verify();
     }
 
     @Test
     // FIXME: remove @Disabled to activate the test
     @Disabled("fix as an exercise for the workshop")
     void combineFlux() {
-        final Gingerbread chocolate = repository.save(new Gingerbread("chocolate")).block();
-        final Gingerbread cinnamon = repository.save(new Gingerbread("cinnamon")).block();
-        final Gingerbread honey = repository.save(new Gingerbread("honey")).block();
+        final Invoice regular = repository.save(new Invoice("REGULAR")).block();
+        final Invoice proforma = repository.save(new Invoice("PROFORMA")).block();
+        final Invoice overdue = repository.save(new Invoice("OVERDUE")).block();
 
         // FIXME: read all values from database and use only <b>Flux</b> to output the expected result
         ////////////////////////////////////////////////////////////////
         final Flux first = Flux.empty();
-        final Flux second = Flux.empty();
-        final Flux combination = Flux.empty();
+		final Flux second = Flux.empty();
+		final Flux third = Flux.empty();
+		final Flux combination = Flux.empty();
         ////////////////////////////////////////////////////////////////
 
         StepVerifier.create(combination.log())
-                .expectNext(Tuples.of(4, chocolate))
-                .expectNext(Tuples.of(5, cinnamon))
-                .expectNext(Tuples.of(6, honey))
+                .expectNext(Tuples.of(1, "REGULAR"))
+                .expectNext(Tuples.of(2, "PROFORMA"))
+                .expectNext(Tuples.of(3, "OVERDUE"))
                 .expectComplete()
                 .verify();
     }

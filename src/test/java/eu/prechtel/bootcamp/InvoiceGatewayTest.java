@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -9,18 +9,18 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.util.Base64;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class GingerbreadGatewayTest {
+class InvoiceGatewayTest {
 
     final WebTestClient webTestClient;
 
-    public GingerbreadGatewayTest(@Autowired WebTestClient webTestClient) {
+    public InvoiceGatewayTest(@Autowired WebTestClient webTestClient) {
         this.webTestClient = webTestClient;
     }
 
     @Test
     void unauthenticatedTest() {
         webTestClient.get()
-                .uri("/gingerbread/1")
+                .uri("/Invoice/1")
                 .exchange()
                 .expectStatus().isUnauthorized();
     }

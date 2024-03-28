@@ -6,7 +6,7 @@ Workshop for Spring Reactive, Security, Data and Cloud Gateway
 <!--
 * Reactive Basics
 * Spring Webflux
-* Spring Data Reactive with MongoDB
+* Spring Data Reactive
 
 * Spring Security Reactive
 * Spring Cloud Gateway

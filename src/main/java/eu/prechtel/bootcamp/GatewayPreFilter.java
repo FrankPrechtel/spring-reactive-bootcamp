@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

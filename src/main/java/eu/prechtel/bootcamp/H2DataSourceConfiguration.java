@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import io.r2dbc.h2.H2ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactory;

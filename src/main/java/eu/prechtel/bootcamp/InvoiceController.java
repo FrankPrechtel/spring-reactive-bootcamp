@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
@@ -9,36 +9,36 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-public class GingerbreadController {
+public class InvoiceController {
 
-    final Logger log = LoggerFactory.getLogger(GingerbreadController.class);
+    final Logger log = LoggerFactory.getLogger(InvoiceController.class);
 
-    final GingerbreadRepository repository;
+    final InvoiceRepository repository;
     final MeterRegistry registry;
 
-    GingerbreadController(
-            @Autowired GingerbreadRepository repository,
+    InvoiceController(
+            @Autowired InvoiceRepository repository,
             @Autowired MeterRegistry registry) {
         this.repository = repository;
         this.registry = registry;
     }
 
-    @GetMapping(value = "/gingerbread/{id}")
-    public Mono<Gingerbread> singleGingerbread(@PathVariable Integer id) {
+    @GetMapping(value = "/Invoice/{id}")
+    public Mono<Invoice> singleInvoice(@PathVariable Integer id) {
         return repository.findBy(id);
     }
 
-    @PostMapping(value = "/gingerbread")
-    public Mono<Gingerbread> createGingerbread(@RequestBody Gingerbread gingerbread) {
-        return repository.save(gingerbread);
+    @PostMapping(value = "/Invoice")
+    public Mono<Invoice> createInvoice(@RequestBody Invoice Invoice) {
+        return repository.save(Invoice);
     }
 
-    @GetMapping(value = "/gingerbreads")
-    public Flux<Gingerbread> multipleGingerbread() {
+    @GetMapping(value = "/Invoices")
+    public Flux<Invoice> multipleInvoice() {
         return repository.findAll();
     }
 
-    @DeleteMapping(value = "/gingerbreads")
+    @DeleteMapping(value = "/Invoices")
     public Mono<Void> deleteAll() {
         return repository.deleteAll();
     }

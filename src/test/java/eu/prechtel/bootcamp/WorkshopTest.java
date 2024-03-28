@@ -1,19 +1,13 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.IntBuffer;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HexFormat;
 
-@DisplayName("Tests for custom workshop of 2023-06-26")
+@DisplayName("Tests for custom workshop")
 public class WorkshopTest {
 	@Test
 	void cleanupResources() {

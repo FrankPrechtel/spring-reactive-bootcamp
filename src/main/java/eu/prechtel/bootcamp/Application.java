@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class Application {
     @PostConstruct
     public void init() {
         List<String> statements = Arrays.asList(
-                "DROP TABLE IF EXISTS gingerbread;",
-                "CREATE TABLE gingerbread (id SERIAL PRIMARY KEY, flavor VARCHAR(255));",
-                "INSERT INTO gingerbread VALUES (1, 'cinnamon');"
+                "DROP TABLE IF EXISTS Invoice;",
+                "CREATE TABLE Invoice (id SERIAL PRIMARY KEY, type VARCHAR(255));",
+                "INSERT INTO Invoice VALUES (1, 'PROFORMA');"
         );
         statements.forEach(it -> databaseClient.sql(it)
                 .fetch()

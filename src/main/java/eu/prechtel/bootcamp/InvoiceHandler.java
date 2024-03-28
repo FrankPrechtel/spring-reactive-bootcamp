@@ -1,4 +1,4 @@
-package eu.prechtel.reciprocus;
+package eu.prechtel.bootcamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,11 +8,11 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Service
-public class GingerbreadHandler {
+public class InvoiceHandler {
 
-    final GingerbreadRepository repository;
+    final InvoiceRepository repository;
 
-    GingerbreadHandler(@Autowired GingerbreadRepository repository) {
+    InvoiceHandler(@Autowired InvoiceRepository repository) {
         this.repository = repository;
     }
 
