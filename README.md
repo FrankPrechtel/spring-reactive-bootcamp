@@ -26,3 +26,4 @@ Workshop for Spring Reactive, Security, Data and Cloud Gateway
 * https://cloud.spring.io/spring-cloud-gateway/reference/html/
 * https://spring.io/blog/2018/03/16/micrometer-spring-boot-2-s-new-application-metrics-collector
 * https://cloud.spring.io/spring-cloud-sleuth/2.0.x/multi/multi__introduction.html#_terminology
+* https://spring.io/blog/2023/03/30/context-propagation-with-project-reactor-3-unified-bridging-between-reactive
