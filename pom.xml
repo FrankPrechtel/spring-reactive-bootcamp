@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>3.3.4</version>
         <relativePath/>
     </parent>
     <groupId>eu.prechtel</groupId>
@@ -16,8 +16,8 @@
 
     <properties>
         <java.version>21</java.version>
-        <spring-reactor-resilience4j.version>3.1.1</spring-reactor-resilience4j.version>
-        <spring-cloud-dependencies.version>2023.0.1</spring-cloud-dependencies.version>
+        <spring-reactor-resilience4j.version>3.1.2</spring-reactor-resilience4j.version>
+        <spring-cloud-dependencies.version>2023.0.3</spring-cloud-dependencies.version>
         <argLine/>
     </properties>
 
@@ -130,11 +130,31 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.5.1</version>
                 <configuration>
 <!--                    <forkCount>0</forkCount>-->
                     <argLine>@{argLine} -XX:+AllowRedefinitionToAddDeleteMethods -XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -143,7 +163,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version>
+                <version>0.8.12</version>
             </plugin>
         </plugins>
     </reporting>
