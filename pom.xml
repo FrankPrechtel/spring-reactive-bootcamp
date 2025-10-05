@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
+        <version>3.5.6</version>
         <relativePath/>
     </parent>
     <groupId>eu.prechtel</groupId>
@@ -17,7 +17,7 @@
     <properties>
         <java.version>21</java.version>
         <spring-reactor-resilience4j.version>3.1.2</spring-reactor-resilience4j.version>
-        <spring-cloud-dependencies.version>2023.0.3</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>2025.0.0</spring-cloud-dependencies.version>
         <argLine/>
     </properties>
 
